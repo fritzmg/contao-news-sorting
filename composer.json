@@ -27,7 +27,7 @@
 	"extra":{
 		"contao":{
 			"sources": {
-				"system/modules/formfield_errormsg":"system/modules/formfield_errormsg"
+				"system/modules/news_sorting":"system/modules/news_sorting"
 			}
 		}
 	}
