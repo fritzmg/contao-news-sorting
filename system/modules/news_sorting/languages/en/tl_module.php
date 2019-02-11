@@ -12,9 +12,10 @@
  */
 
 
-$GLOBALS['TL_LANG']['tl_module']['news_sorting']       = array('Sort order', 'Please choose the sort order of the news entries.');
-$GLOBALS['TL_LANG']['tl_module']['sort_date_asc']      = 'Date (ascending)';
-$GLOBALS['TL_LANG']['tl_module']['sort_date_desc']     = 'Date (descending)';
-$GLOBALS['TL_LANG']['tl_module']['sort_headline_asc']  = 'Headline (ascending)';
-$GLOBALS['TL_LANG']['tl_module']['sort_headline_desc'] = 'Headline (descending)';
-$GLOBALS['TL_LANG']['tl_module']['sort_random']        = 'Random';
+$GLOBALS['TL_LANG']['tl_module']['news_sorting']          = array('Sort order', 'Please choose the sort order of the news entries.');
+$GLOBALS['TL_LANG']['tl_module']['sort_date_asc']         = 'Date (ascending)';
+$GLOBALS['TL_LANG']['tl_module']['sort_date_desc']        = 'Date (descending)';
+$GLOBALS['TL_LANG']['tl_module']['sort_headline_asc']     = 'Headline (ascending)';
+$GLOBALS['TL_LANG']['tl_module']['sort_headline_desc']    = 'Headline (descending)';
+$GLOBALS['TL_LANG']['tl_module']['sort_random']           = 'Random';
+$GLOBALS['TL_LANG']['tl_module']['sort_random_date_desc'] = 'Random (Date descending)';

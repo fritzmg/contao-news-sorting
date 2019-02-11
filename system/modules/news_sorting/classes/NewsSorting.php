@@ -50,6 +50,7 @@ class NewsSorting
 				break;
 
 			case 'sort_random':
+			case 'sort_random_date_desc':
 				$arrOptions['order'] = "RAND()";
 				break;
 
@@ -57,6 +58,20 @@ class NewsSorting
 				$arrOptions['order'] = "$t.date DESC";
 		}
 
-		return \NewsModel::findPublishedByPids($newsArchives, $blnFeatured, $limit, $offset, $arrOptions);
+		$objCollection = \NewsModel::findPublishedByPids($newsArchives, $blnFeatured, $limit, $offset, $arrOptions);
+
+		if (null !== $objCollection && 'sort_random_date_desc' === $objModule->news_sorting)
+		{
+			$arrModels = $objCollection->getModels();
+
+			usort($arrModels, function($a, $b)
+			{
+				return $b->date - $a->date;
+			});
+
+			$objCollection = new \Model\Collection($arrModels, 'tl_news');
+		}
+
+		return $objCollection;
 	}
 }
