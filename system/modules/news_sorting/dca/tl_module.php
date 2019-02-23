@@ -26,7 +26,7 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['news_sorting'] = array
 	'default'                 => 'sort_date_desc',
 	'exclude'                 => true,
 	'inputType'               => 'select',
-	'options'                 => array('sort_date_desc', 'sort_date_asc', 'sort_headline_asc', 'sort_headline_desc', 'sort_random', 'sort_random_date_desc'),
+	'options'                 => array('sort_date_desc', 'sort_date_asc', 'sort_headline_asc', 'sort_headline_desc', 'sort_random', 'sort_random_date_desc', 'sort_featured_desc'),
 	'reference'               => &$GLOBALS['TL_LANG']['tl_module'],
 	'eval'                    => array('tl_class'=>'w50'),
 	'sql'                     => "varchar(32) NOT NULL default ''"
