@@ -6,3 +6,13 @@ Contao News Sorting
 =====================
 
 Contao extension to allow sort settings in the news list. This setting is then applied via the `newsListFetchItems` hook.
+
+The following settings are available:
+
+* Date (ascending)
+* Date (descending)
+* Headline (ascending)
+* Headline (descending)
+* Random
+* Random (Date descending)
+* Featured (Date descending)
