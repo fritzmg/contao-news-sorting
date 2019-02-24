@@ -17,4 +17,4 @@ The following settings are available:
 * Random (Date descending)
 * Featured (Date descending)
 
-Some of these settings are already available in some Contao 4 versions. The extensions is fully compatible with that and only uses the hook when necessary.
+Some of these settings are already available in some Contao 4 versions. The extension is fully compatible with that and only uses the hook when necessary.
