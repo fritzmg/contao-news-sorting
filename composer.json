@@ -30,10 +30,7 @@
         "contao":{
             "sources": {
                 "system/modules/news_sorting": "system/modules/news_sorting"
-            },
-            "runonce": [
-                "system/modules/news_sorting/config/update.php"
-            ]
+            }
         }
     }
 }
