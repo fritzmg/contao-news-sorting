@@ -21,14 +21,19 @@
     },
     "require":{
         "php": ">=5.4",
-        "contao/core-bundle": ">=3.5,<4.5",
-        "contao-community-alliance/composer-plugin": "^2.4 || ^3.0"
+        "contao/core-bundle": "^3.5 || ^4.4",
+        "contao-community-alliance/composer-plugin": "^2.4 || ^3.0",
+        "jean85/pretty-package-versions": "^1.0",
+        "composer/semver": "^1.0"
     },
     "extra":{
         "contao":{
             "sources": {
                 "system/modules/news_sorting": "system/modules/news_sorting"
-            }
+            },
+            "runonce": [
+                "system/modules/news_sorting/config/update.php"
+            ]
         }
     }
 }

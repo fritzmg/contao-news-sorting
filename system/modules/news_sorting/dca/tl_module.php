@@ -13,21 +13,29 @@
 
 
 /**
- * Extend tl_module palettes
+ * Check for news bundle
  */
-$GLOBALS['TL_DCA']['tl_module']['palettes']['newslist'] = str_replace(',skipFirst', ',skipFirst,news_sorting', $GLOBALS['TL_DCA']['tl_module']['palettes']['newslist']);
+if (class_exists(\Contao\CoreBundle\ContaoCoreBundle::class) && !class_exists(\Contao\NewsBundle\ContaoNewsBundle::class)) {
+	return;
+}
+
 
 /**
- * Add new fields to tl_module
+ * Extend tl_module palettes
  */
-$GLOBALS['TL_DCA']['tl_module']['fields']['news_sorting'] = array
-(
-	'label'                   => &$GLOBALS['TL_LANG']['tl_module']['news_sorting'],
-	'default'                 => 'sort_date_desc',
-	'exclude'                 => true,
-	'inputType'               => 'select',
-	'options'                 => array('sort_date_desc', 'sort_date_asc', 'sort_headline_asc', 'sort_headline_desc', 'sort_random', 'sort_random_date_desc', 'sort_featured_desc'),
-	'reference'               => &$GLOBALS['TL_LANG']['tl_module'],
-	'eval'                    => array('tl_class'=>'w50'),
-	'sql'                     => "varchar(32) NOT NULL default ''"
-);
+if (class_exists(\Contao\CoreBundle\ContaoCoreBundle::class)) {
+    $version = \Jean85\PrettyVersions::getVersion('contao/core-bundle');
+    if (\Composer\Semver\Semver::satisfies($version->getShortVersion(), '<4.5')) {
+    	\Contao\CoreBundle\DataContainer\PaletteManipulator::create()
+    		->addField('news_order', 'config_legend', \Contao\CoreBundle\DataContainer\PaletteManipulator::POSITION_APPEND)
+    		->applyToPalette('newslist', 'tl_module');
+    }
+} else {
+	$GLOBALS['TL_DCA']['tl_module']['palettes']['newslist'] = str_replace(',news_featured', ',news_featured,news_order', $GLOBALS['TL_DCA']['tl_module']['palettes']['newslist']);
+}
+
+
+/**
+ * Add options_callback to news_order field
+ */
+$GLOBALS['TL_DCA']['tl_module']['fields']['news_order']['options_callback'] = ['NewsSorting', 'getSortingOptions'];
