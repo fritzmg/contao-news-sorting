@@ -47,7 +47,11 @@ class NewsSorting
     public function __construct()
     {
         if (class_exists(\Contao\CoreBundle\ContaoCoreBundle::class)) {
-            $this->contao4Version = \Jean85\PrettyVersions::getVersion('contao/core-bundle')->getShortVersion();
+            try {
+                $this->contao4Version = \Jean85\PrettyVersions::getVersion('contao/core-bundle')->getShortVersion();
+            } catch (\OutOfBoundsException $e) {
+                $this->contao4Version = \Jean85\PrettyVersions::getVersion('contao/contao')->getShortVersion();
+            }
         }
     }
 

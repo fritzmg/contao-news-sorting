@@ -24,8 +24,12 @@ if (class_exists(\Contao\CoreBundle\ContaoCoreBundle::class) && !class_exists(\C
  * Extend tl_module palettes
  */
 if (class_exists(\Contao\CoreBundle\ContaoCoreBundle::class)) {
-    $version = \Jean85\PrettyVersions::getVersion('contao/core-bundle');
-    if (\Composer\Semver\Semver::satisfies($version->getShortVersion(), '<4.5')) {
+	try {
+	    $version = \Jean85\PrettyVersions::getVersion('contao/core-bundle')->getShortVersion();
+	} catch (\OutOfBoundsException $e) {
+	    $version = \Jean85\PrettyVersions::getVersion('contao/contao')->getShortVersion();
+	}
+    if (\Composer\Semver\Semver::satisfies($version, '<4.5')) {
     	\Contao\CoreBundle\DataContainer\PaletteManipulator::create()
     		->addField('news_order', 'config_legend', \Contao\CoreBundle\DataContainer\PaletteManipulator::POSITION_APPEND)
     		->applyToPalette('newslist', 'tl_module');

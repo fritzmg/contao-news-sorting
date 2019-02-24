@@ -9,8 +9,8 @@ Contao extension to allow sort settings in the news list. This setting is then a
 
 The following settings are available:
 
-* Date (ascending)
 * Date (descending)
+* Date (ascending)
 * Headline (ascending)
 * Headline (descending)
 * Random
