@@ -54,6 +54,10 @@ class NewsSorting
 				$arrOptions['order'] = "RAND()";
 				break;
 
+			case 'sort_featured_desc':
+				$arrOptions['order'] = "$t.featured DESC, $t.date DESC";
+				break;
+				
 			default:
 				$arrOptions['order'] = "$t.date DESC";
 		}
