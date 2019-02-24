@@ -39,3 +39,4 @@ if (class_exists(\Contao\CoreBundle\ContaoCoreBundle::class)) {
  * Add options_callback to news_order field
  */
 $GLOBALS['TL_DCA']['tl_module']['fields']['news_order']['options_callback'] = ['NewsSorting', 'getSortingOptions'];
+$GLOBALS['TL_DCA']['tl_module']['fields']['news_order']['reference'] = &$GLOBALS['TL_LANG']['tl_module'];

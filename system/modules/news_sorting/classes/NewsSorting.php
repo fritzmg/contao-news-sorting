@@ -22,7 +22,7 @@ class NewsSorting
      * News list sort options of the contao/news-bundle (>=4.5)
      * @var array
      */
-    protected static $coreSortOptions45 = ['order_date_asc', 'order_date_desc', 'order_headline_asc', 'order_headline_desc', 'order_random'];
+    protected static $coreSortOptions45 = ['order_date_desc', 'order_date_asc', 'order_headline_asc', 'order_headline_desc', 'order_random'];
 
     /**
      * News list sort options of the contao/news-bundle (>=4.8)
@@ -144,6 +144,11 @@ class NewsSorting
      */
     private function useHook(Module $module)
     {
+        // don't use hook for default sorting
+        if (!$module->news_order || 'order_date_desc' === $module->news_order) {
+            return false;
+        }
+
         // not Contao 4: use hook
         if (null === $this->contao4Version) {
             return true;
