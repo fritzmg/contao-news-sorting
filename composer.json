@@ -1,34 +1,34 @@
 {
-	"name":"fritzmg/contao-news-sorting",
-	"description":"Sort settings for the Contao news list.",
-	"keywords":["contao", "news", "list"],
-	"type":"contao-module",
-	"homepage":"http://www.inspiredminds.at",
-	"license":"LGPL-3.0+",
-	"authors":[
-		{
-			"name":"Fritz Michael Gschwantner",
-			"homepage":"http://www.inspiredminds.at",
-			"email":"fmg@inspiredminds.at",
-			"role":"Developer"
-		}
-	],
-	"support":{
-		"email":"fmg@inspiredminds.at",
-		"issues":"https://github.com/fritzmg/contao-news-sorting/issues",
-		"source":"https://github.com/fritzmg/contao-news-sorting",
-		"forum":"https://community.contao.org/de"
-	},
-	"require":{
-		"php":">=5.4",
-		"contao/core-bundle":">=3.5,<4.5",
-		"contao-community-alliance/composer-plugin":"~2.4 || ~3.0"
-	},
-	"extra":{
-		"contao":{
-			"sources": {
-				"system/modules/news_sorting":"system/modules/news_sorting"
-			}
-		}
-	}
+    "name": "fritzmg/contao-news-sorting",
+    "description": "Sort settings for the Contao news list.",
+    "keywords":["contao", "news", "list"],
+    "type": "contao-module",
+    "homepage": "http://www.inspiredminds.at",
+    "license": "LGPL-3.0-or-later",
+    "authors":[
+        {
+            "name": "Fritz Michael Gschwantner",
+            "homepage": "http://www.inspiredminds.at",
+            "email": "fmg@inspiredminds.at",
+            "role": "Developer"
+        }
+    ],
+    "support":{
+        "email": "fmg@inspiredminds.at",
+        "issues": "https://github.com/fritzmg/contao-news-sorting/issues",
+        "source": "https://github.com/fritzmg/contao-news-sorting",
+        "forum": "https://community.contao.org/de"
+    },
+    "require":{
+        "php": ">=5.4",
+        "contao/core-bundle": ">=3.5,<4.5",
+        "contao-community-alliance/composer-plugin": "^2.4 || ^3.0"
+    },
+    "extra":{
+        "contao":{
+            "sources": {
+                "system/modules/news_sorting": "system/modules/news_sorting"
+            }
+        }
+    }
 }
