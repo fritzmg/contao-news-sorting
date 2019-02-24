@@ -12,11 +12,10 @@
  */
 
 
-$GLOBALS['TL_LANG']['tl_module']['news_sorting']          = array('Sortierung','Hier können Sie die Sortierung der Einträge festlegen.');
-$GLOBALS['TL_LANG']['tl_module']['sort_date_asc']         = 'Datum (aufsteigend)';
-$GLOBALS['TL_LANG']['tl_module']['sort_date_desc']        = 'Datum (absteigend)';
-$GLOBALS['TL_LANG']['tl_module']['sort_headline_asc']     = 'Titel (aufsteigend)';
-$GLOBALS['TL_LANG']['tl_module']['sort_headline_desc']    = 'Titel (absteigend)';
-$GLOBALS['TL_LANG']['tl_module']['sort_random']           = 'Zufällig';
-$GLOBALS['TL_LANG']['tl_module']['sort_random_date_desc'] = 'Zufällig (Datum absteigend)';
-$GLOBALS['TL_LANG']['tl_module']['sort_featured_desc']    = 'Hervorgehoben (Datum absteigend)';
+$GLOBALS['TL_LANG']['tl_module']['order_date_asc']         = 'Datum (aufsteigend)';
+$GLOBALS['TL_LANG']['tl_module']['order_date_desc']        = 'Datum (absteigend)';
+$GLOBALS['TL_LANG']['tl_module']['order_headline_asc']     = 'Titel (aufsteigend)';
+$GLOBALS['TL_LANG']['tl_module']['order_headline_desc']    = 'Titel (absteigend)';
+$GLOBALS['TL_LANG']['tl_module']['order_random']           = 'Zufällig';
+$GLOBALS['TL_LANG']['tl_module']['order_random_date_desc'] = 'Zufällig (Datum absteigend)';
+$GLOBALS['TL_LANG']['tl_module']['order_featured_desc']    = 'Hervorgehoben (Datum absteigend)';

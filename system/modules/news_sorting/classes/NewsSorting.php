@@ -60,7 +60,7 @@ class NewsSorting
      */
     public function getSortingOptions(DataContainer $dc)
     {
-        if ($dc->activeRecord && 'newsmenu' === $dc->activeRecord->type()) {
+        if ($dc->activeRecord && 'newsmenu' === $dc->activeRecord->type) {
             if ($this->contao4Version === null || \Composer\Semver\Semver::satisfies($this->contao4Version, '<4.5')) {
                 return ['ascending', 'descending'];    
             }
@@ -68,7 +68,7 @@ class NewsSorting
             return ['order_date_asc', 'order_date_desc'];
         }
 
-        return array_unique(array_merge($coreSortOptions45, $moduleSortOptions, $coreSortOptions48));
+        return array_unique(array_merge(self::$coreSortOptions45, self::$moduleSortOptions, self::$coreSortOptions48));
     }
 
     /**
