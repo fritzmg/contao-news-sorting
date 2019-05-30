@@ -1,8 +1,12 @@
 <?php
 
+use Codefog\NewsCategoriesBundle\CodefogNewsCategoriesBundle;
+use Composer\Semver\Semver;
 use Contao\DataContainer;
 use Contao\Model\Collection;
 use Contao\Module;
+use Contao\StringUtil;
+use Contao\System;
 
 /**
  * Contao Open Source CMS
@@ -28,7 +32,7 @@ class NewsSorting
      * News list sort options of the contao/news-bundle (>=4.8)
      * @var array
      */
-    protected static $coreSortOptions48 = ['order_featured_desc'];
+    protected static $coreSortOptions48 = ['order_featured_desc', 'order_featured_asc'];
 
     /**
      * News list sort features not in the core
@@ -42,6 +46,12 @@ class NewsSorting
     protected $contao4Version = null;
 
     /**
+     * Whether the news_categories bundle is available
+     * @var bool
+     */
+    protected $hasNewsCategories = false;
+
+    /**
      * Constructor
      */
     public function __construct()
@@ -52,6 +62,9 @@ class NewsSorting
             } catch (\OutOfBoundsException $e) {
                 $this->contao4Version = \Jean85\PrettyVersions::getVersion('contao/contao')->getShortVersion();
             }
+
+            $bundles = System::getContainer()->getParameter('kernel.bundles');
+            $this->hasNewsCategories = in_array(CodefogNewsCategoriesBundle::class, $bundles);
         }
     }
 
@@ -114,6 +127,10 @@ class NewsSorting
                 $arrOptions['order'] = "RAND()";
                 break;
 
+            case 'order_featured_asc':
+                $arrOptions['order'] = "$t.featured DESC, $t.date";
+                break;
+
             case 'order_featured_desc':
                 $arrOptions['order'] = "$t.featured DESC, $t.date DESC";
                 break;
@@ -153,18 +170,31 @@ class NewsSorting
             return false;
         }
 
-        // not Contao 4: use hook
+        // not Contao 4: always use hook
         if (null === $this->contao4Version) {
             return true;
         }
 
+        // don't use hook when news_categories filtering is enabled
+        if ($this->hasNewsCategories) {
+            if ($module->news_filterCategoriesCumulative || $module->news_filterCategories || $module->news_relatedCategories) {
+                return false;
+            }
+
+            $defaultFilter = StringUtil::deserialize($module->news_filterDefault, true);
+
+            if (!empty($defaultFilter)) {
+                return false;
+            }
+        }
+
         // only use hook in Contao >=4.5, if the core options are not used
-        if (\Composer\Semver\Semver::satisfies($this->contao4Version, '>=4.5') && \in_array($module->news_order, self::$coreSortOptions45)) {
+        if (Semver::satisfies($this->contao4Version, '>=4.5') && \in_array($module->news_order, self::$coreSortOptions45)) {
             return false;
         }
 
         // do not use the hook, if the new 'order_featured_desc' option is used in Contao >=4.8
-        if (\Composer\Semver\Semver::satisfies($this->contao4Version, '>=4.8') && \in_array($module->news_order, self::$coreSortOptions48)) {
+        if (Semver::satisfies($this->contao4Version, '>=4.8') && \in_array($module->news_order, self::$coreSortOptions48)) {
             return false;
         }
 
