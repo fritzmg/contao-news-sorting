@@ -1,5 +1,7 @@
 <?php
 
+use Composer\Semver\Semver;
+
 /**
  * Contao Open Source CMS
  *
@@ -7,8 +9,8 @@
  *
  * @package   news_sorting
  * @author    Fritz Michael Gschwantner <https://github.com/fritzmg>
- * @license   LGPL-3.0+
- * @copyright Fritz Michael Gschwantner 2017
+ * @license   LGPL-3.0-or-later
+ * @copyright Fritz Michael Gschwantner 2019
  */
 
 
@@ -19,3 +21,7 @@ $GLOBALS['TL_LANG']['tl_module']['order_headline_desc']    = 'Titel (absteigend)
 $GLOBALS['TL_LANG']['tl_module']['order_random']           = 'Zufällig';
 $GLOBALS['TL_LANG']['tl_module']['order_random_date_desc'] = 'Zufällig (Datum absteigend)';
 $GLOBALS['TL_LANG']['tl_module']['order_featured_desc']    = 'Hervorgehoben (Datum absteigend)';
+
+if (Semver::satisfies(NewsSorting::getContaoVersion(), '<4.8')) {
+    $GLOBALS['TL_LANG']['tl_module']['featured_first']     = 'Zeige hervorgehobene Nachrichten zuerst';
+}

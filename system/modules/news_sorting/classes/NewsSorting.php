@@ -2,11 +2,13 @@
 
 use Codefog\NewsCategoriesBundle\CodefogNewsCategoriesBundle;
 use Composer\Semver\Semver;
+use Contao\CoreBundle\ContaoCoreBundle;
 use Contao\DataContainer;
 use Contao\Model\Collection;
 use Contao\Module;
 use Contao\StringUtil;
 use Contao\System;
+use Jean85\PrettyVersions;
 
 /**
  * Contao Open Source CMS
@@ -29,13 +31,8 @@ class NewsSorting
     protected static $coreSortOptions45 = ['order_date_desc', 'order_date_asc', 'order_headline_asc', 'order_headline_desc', 'order_random'];
 
     /**
-     * News list sort options of the contao/news-bundle (>=4.8)
-     * @var array
-     */
-    protected static $coreSortOptions48 = ['order_featured_desc', 'order_featured_asc'];
-
-    /**
      * News list sort features not in the core
+     * @var array
      */
     protected static $moduleSortOptions = ['order_random_date_desc'];
 
@@ -85,7 +82,7 @@ class NewsSorting
             return ['order_date_asc', 'order_date_desc'];
         }
 
-        return array_unique(array_merge(self::$coreSortOptions45, self::$moduleSortOptions, self::$coreSortOptions48));
+        return array_unique(array_merge(self::$coreSortOptions45, self::$moduleSortOptions));
     }
 
     /**
@@ -107,39 +104,36 @@ class NewsSorting
         
         // Determine sorting
         $t = \NewsModel::getTable();
-        $arrOptions = array();
+        $order = '';
+
+        if ('featured_first' === $module->news_featured) {
+			$order .= "$t.featured DESC, ";
+		}
+        
         switch ($module->news_order)
         {
             case 'order_date_asc':
-                $arrOptions['order'] = "$t.date ASC";
+                $order .= "$t.date ASC";
                 break;
 
             case 'order_headline_asc':
-                $arrOptions['order'] = "$t.headline ASC";
+                $order .= "$t.headline ASC";
                 break;
 
             case 'order_headline_desc':
-                $arrOptions['order'] = "$t.headline DESC";
+                $order .= "$t.headline DESC";
                 break;
 
             case 'order_random':
             case 'order_random_date_desc':
-                $arrOptions['order'] = "RAND()";
-                break;
-
-            case 'order_featured_asc':
-                $arrOptions['order'] = "$t.featured DESC, $t.date";
-                break;
-
-            case 'order_featured_desc':
-                $arrOptions['order'] = "$t.featured DESC, $t.date DESC";
+                $order .= "RAND()";
                 break;
                 
             default:
-                $arrOptions['order'] = "$t.date DESC";
+                $order .= "$t.date DESC";
         }
-
-        $collection = \NewsModel::findPublishedByPids($newsArchives, $featured, $limit, $offset, $arrOptions);
+        \Symfony\Component\VarDumper\VarDumper::dump($order);
+        $collection = \NewsModel::findPublishedByPids($newsArchives, $featured, $limit, $offset, ['order' => $order]);
 
         if (null !== $collection && 'order_random_date_desc' === $module->news_sorting)
         {
@@ -166,7 +160,7 @@ class NewsSorting
     private function useHook(Module $module)
     {
         // don't use hook for default sorting
-        if (!$module->news_order || 'order_date_desc' === $module->news_order) {
+        if ((!$module->news_order || 'order_date_desc' === $module->news_order) && 'featured_first' !== $module->news_featured) {
             return false;
         }
 
@@ -188,17 +182,33 @@ class NewsSorting
             }
         }
 
+        // use the hook, if the new 'featured_first' option is used in Contao <4.8
+        if (Semver::satisfies($this->contao4Version, '<4.8') && 'featured_first' === $module->news_featured) {
+            return true;
+        }
+
         // only use hook in Contao >=4.5, if the core options are not used
         if (Semver::satisfies($this->contao4Version, '>=4.5') && \in_array($module->news_order, self::$coreSortOptions45)) {
             return false;
         }
 
-        // do not use the hook, if the new 'order_featured_desc' option is used in Contao >=4.8
-        if (Semver::satisfies($this->contao4Version, '>=4.8') && \in_array($module->news_order, self::$coreSortOptions48)) {
-            return false;
-        }
-
         // otherwise use the hook
         return true;
+    }
+
+    /**
+     * Helper function to get the current Contao version.
+     */
+    public static function getContaoVersion(): string
+    {
+        if (class_exists(ContaoCoreBundle::class)) {
+            try {
+                return PrettyVersions::getVersion('contao/core-bundle')->getShortVersion();
+            } catch (\OutOfBoundsException $e) {
+                return PrettyVersions::getVersion('contao/contao')->getShortVersion();
+            }           
+        } else {
+            return VERSION.'.'.BUILD;
+        }
     }
 }
