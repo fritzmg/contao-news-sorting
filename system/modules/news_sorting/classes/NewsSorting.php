@@ -132,7 +132,7 @@ class NewsSorting
             default:
                 $order .= "$t.date DESC";
         }
-        \Symfony\Component\VarDumper\VarDumper::dump($order);
+
         $collection = \NewsModel::findPublishedByPids($newsArchives, $featured, $limit, $offset, ['order' => $order]);
 
         if (null !== $collection && 'order_random_date_desc' === $module->news_sorting)
