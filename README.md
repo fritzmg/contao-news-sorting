@@ -15,7 +15,6 @@ The following settings are available:
 * Headline (descending)
 * Random
 * Random (Date descending)
-* Featured (Date ascending)
-* Featured (Date descending)
+* Featured
 
 Some of these settings are already available in some Contao 4 versions. The extension is fully compatible with that and only uses the hook when necessary.
