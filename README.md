@@ -1,4 +1,3 @@
-[![](https://img.shields.io/maintenance/yes/2019.svg)](https://github.com/fritzmg/contao-news-sorting)
 [![](https://img.shields.io/packagist/v/fritzmg/contao-news-sorting.svg)](https://packagist.org/packages/fritzmg/contao-news-sorting)
 [![](https://img.shields.io/packagist/dt/fritzmg/contao-news-sorting.svg)](https://packagist.org/packages/fritzmg/contao-news-sorting)
 
