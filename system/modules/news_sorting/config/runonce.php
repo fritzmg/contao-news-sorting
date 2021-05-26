@@ -11,8 +11,11 @@
  * @copyright Fritz Michael Gschwantner 2017
  */
 
+use Contao\Database;
 
-if (\Database::getInstance()->fieldExists('news_sorting', 'tl_module')) {
-    \Database::getInstance()->execute("UPDATE tl_module SET news_order = REPLACE(news_sorting, 'sort_', 'order_') WHERE type = 'newslist'");
-    \Database::getInstance()->execute("ALTER TABLE tl_module DROP COLUMN news_sorting");
+$db = Database::getInstance();
+
+if ($db->tableExists('tl_module') && $db->fieldExists('news_sorting', 'tl_module')) {
+    $db->execute("UPDATE tl_module SET news_order = REPLACE(news_sorting, 'sort_', 'order_') WHERE type = 'newslist'");
+    $db->execute("ALTER TABLE tl_module DROP COLUMN news_sorting");
 }
