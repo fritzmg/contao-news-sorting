@@ -1,4 +1,10 @@
 services:
-  NewsSortingBunlde\EventListener\NewsSortingListener:
+  NewsSortingBundle\EventListener\NewsSortingListener:
     arguments:
       - '%kernel.bundles%'
+
+  NewsSortingBundle\Migration\NewsSortingMigration:
+    arguments:
+      - '@database_connection'
+    tags:
+      - { name: 'contao.migration' }
