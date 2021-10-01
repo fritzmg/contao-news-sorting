@@ -2,6 +2,14 @@
 
 declare(strict_types=1);
 
+/*
+ * This file is part of the NewsSorting Bundle.
+ *
+ * (c) inspiredminds
+ *
+ * @license LGPL-3.0-or-later
+ */
+
 namespace NewsSortingBundle\EventListener;
 
 use Contao\Module;
@@ -11,10 +19,6 @@ abstract class AbstractNewsListFetchItemsListener extends AbstractListener
 {
     /**
      * Checks whether the hook should be used.
-     *
-     * @param Module $module
-     *
-     * @return bool
      */
     protected function useHook(Module $module): bool
     {
@@ -24,21 +28,20 @@ abstract class AbstractNewsListFetchItemsListener extends AbstractListener
         }
 
         // only use hook , if the module options are used
-        return \in_array($module->news_order, self::$moduleSortOptions);
+        return \in_array($module->news_order, self::$moduleSortOptions, true);
     }
 
     protected function getOrder(Module $module): string
     {
         // Determine sorting
-        $t     = NewsModel::getTable();
+        $t = NewsModel::getTable();
         $order = '';
 
         if ('featured_first' === $module->news_featured) {
             $order .= "$t.featured DESC, ";
         }
 
-        switch ($module->news_order)
-        {
+        switch ($module->news_order) {
             case 'order_date_asc':
                 $order .= "$t.date ASC";
                 break;
@@ -53,7 +56,7 @@ abstract class AbstractNewsListFetchItemsListener extends AbstractListener
 
             case 'order_random':
             case 'order_random_date_desc':
-                $order .= "RAND()";
+                $order .= 'RAND()';
                 break;
 
             case 'order_custom_date_asc':

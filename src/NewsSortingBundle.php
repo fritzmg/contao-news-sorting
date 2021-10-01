@@ -16,5 +16,4 @@ use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 class NewsSortingBundle extends Bundle
 {
-
 }

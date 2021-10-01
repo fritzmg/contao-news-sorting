@@ -2,6 +2,14 @@
 
 declare(strict_types=1);
 
+/*
+ * This file is part of the NewsSorting Bundle.
+ *
+ * (c) inspiredminds
+ *
+ * @license LGPL-3.0-or-later
+ */
+
 namespace NewsSortingBundle\EventListener;
 
 use Codefog\NewsCategoriesBundle\Criteria\NewsCriteria;
@@ -21,8 +29,6 @@ final class NewsCategoriesNewsSortingListener extends AbstractNewsListFetchItems
 
     /**
      * InsertTagsListener constructor.
-     *
-     * @param NewsCriteriaBuilder|null $searchBuilder
      */
     public function __construct(?NewsCriteriaBuilder $searchBuilder)
     {
@@ -32,11 +38,9 @@ final class NewsCategoriesNewsSortingListener extends AbstractNewsListFetchItems
     /**
      * On news list fetch items.
      *
-     * @param array          $archives
-     * @param bool|null      $featured
-     * @param int            $limit
-     * @param int            $offset
-     * @param ModuleNewsList $module
+     * @param bool|null $featured
+     * @param int       $limit
+     * @param int       $offset
      *
      * @return Collection|null
      *
@@ -68,13 +72,11 @@ final class NewsCategoriesNewsSortingListener extends AbstractNewsListFetchItems
     /**
      * Get the criteria.
      *
-     * @param array          $archives
-     * @param bool|null      $featured
-     * @param ModuleNewsList $module
-     *
-     * @return NewsCriteria|null
+     * @param bool|null $featured
      *
      * @throws PageNotFoundException
+     *
+     * @return NewsCriteria|null
      */
     private function getCriteria(array $archives, $featured, ModuleNewsList $module)
     {

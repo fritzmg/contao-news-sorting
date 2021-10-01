@@ -32,7 +32,7 @@ class Plugin implements BundlePluginInterface
         return [
             BundleConfig::create(NewsSortingBundle::class)
                 ->setLoadAfter([ContaoCoreBundle::class, ContaoNewsBundle::class])
-                ->setReplace(['news_sorting'])
+                ->setReplace(['news_sorting']),
         ];
     }
 }

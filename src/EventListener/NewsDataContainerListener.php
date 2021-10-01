@@ -2,6 +2,14 @@
 
 declare(strict_types=1);
 
+/*
+ * This file is part of the NewsSorting Bundle.
+ *
+ * (c) inspiredminds
+ *
+ * @license LGPL-3.0-or-later
+ */
+
 namespace NewsSortingBundle\EventListener;
 
 use Contao\CoreBundle\ServiceAnnotation\Callback;
@@ -23,7 +31,7 @@ class NewsDataContainerListener
         $sorting = $this->session->getBag('contao_backend')->get('sorting')['tl_news'] ?? null;
 
         // Only set sorting as the first field if custom sorting is chosen.
-        if ($sorting === 'sorting') {
+        if ('sorting' === $sorting) {
             $GLOBALS['TL_DCA']['tl_news']['list']['sorting']['fields'] = ['sorting', 'date'];
         }
     }

@@ -2,6 +2,14 @@
 
 declare(strict_types=1);
 
+/*
+ * This file is part of the NewsSorting Bundle.
+ *
+ * (c) inspiredminds
+ *
+ * @license LGPL-3.0-or-later
+ */
+
 namespace NewsSortingBundle\EventListener;
 
 use Contao\CoreBundle\ServiceAnnotation\Callback;
@@ -10,17 +18,14 @@ use Contao\DataContainer;
 final class ModuleDataContainerListener extends AbstractListener
 {
     /**
-     * News list sort options of the contao/news-bundle
+     * News list sort options of the contao/news-bundle.
+     *
      * @var array
      */
     protected static $coreSortOptions = ['order_date_desc', 'order_date_asc', 'order_headline_asc', 'order_headline_desc', 'order_random'];
 
     /**
-     * DCA callback for sorting options
-     *
-     * @param DataContainer $dc
-     *
-     * @return array
+     * DCA callback for sorting options.
      *
      * @Callback(table="tl_module", target="fields.news_order.options")
      */

@@ -1,18 +1,16 @@
 <?php
 
-/**
- * Contao Open Source CMS
+declare(strict_types=1);
+
+/*
+ * This file is part of the NewsSorting Bundle.
  *
- * Copyright (c) 2005-2017 Leo Feyer
+ * (c) inspiredminds
  *
- * @package   news_sorting
- * @author    Fritz Michael Gschwantner <https://github.com/fritzmg>
- * @license   LGPL-3.0+
- * @copyright Fritz Michael Gschwantner 2017
+ * @license LGPL-3.0-or-later
  */
 
-
-/**
+/*
  * Back end modules
  */
-$GLOBALS['TL_LANG']['MOD']['news_sorted'] = array('News sorting', 'Sort news by date, title or randomly.');
+$GLOBALS['TL_LANG']['MOD']['news_sorted'] = ['News sorting', 'Sort news by date, title or randomly.'];
