@@ -1,7 +1,5 @@
 <?php
 
-use Composer\Semver\Semver;
-
 /**
  * Contao Open Source CMS
  *
@@ -21,7 +19,3 @@ $GLOBALS['TL_LANG']['tl_module']['order_headline_desc']    = 'Titel (absteigend)
 $GLOBALS['TL_LANG']['tl_module']['order_random']           = 'Zufällig';
 $GLOBALS['TL_LANG']['tl_module']['order_random_date_desc'] = 'Zufällig (Datum absteigend)';
 $GLOBALS['TL_LANG']['tl_module']['order_featured_desc']    = 'Hervorgehoben (Datum absteigend)';
-
-if (Semver::satisfies(NewsSorting::getContaoVersion(), '<4.8')) {
-    $GLOBALS['TL_LANG']['tl_module']['featured_first']     = 'Zeige hervorgehobene Nachrichten zuerst';
-}

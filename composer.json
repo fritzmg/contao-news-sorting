@@ -31,9 +31,7 @@
         "contao/news-bundle": "^4.9",
         "symfony/dependency-injection": " ^4.4 || ^5.1",
         "symfony/config": "^4.4 || ^5.1",
-        "symfony/http-kernel": "^4.4 || ^5.1",
-        "jean85/pretty-package-versions": "^1.0",
-        "composer/semver": "^1.0"
+        "symfony/http-kernel": "^4.4 || ^5.1"
     },
     "require-dev": {
         "contao/manager-plugin": "^2.11"

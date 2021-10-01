@@ -1,14 +1,11 @@
 <?php
 
 use Codefog\NewsCategoriesBundle\CodefogNewsCategoriesBundle;
-use Composer\Semver\Semver;
-use Contao\CoreBundle\ContaoCoreBundle;
 use Contao\DataContainer;
 use Contao\Model\Collection;
 use Contao\Module;
 use Contao\StringUtil;
 use Contao\System;
-use Jean85\PrettyVersions;
 
 /**
  * Contao Open Source CMS
@@ -37,12 +34,6 @@ class NewsSorting
     protected static $moduleSortOptions = ['order_random_date_desc'];
 
     /**
-     * The Contao 4 version, if available
-     * @var string|null 
-     */
-    protected $contao4Version = null;
-
-    /**
      * Whether the news_categories bundle is available
      * @var bool
      */
@@ -53,16 +44,8 @@ class NewsSorting
      */
     public function __construct()
     {
-        if (class_exists(\Contao\CoreBundle\ContaoCoreBundle::class)) {
-            try {
-                $this->contao4Version = \Jean85\PrettyVersions::getVersion('contao/core-bundle')->getShortVersion();
-            } catch (\OutOfBoundsException $e) {
-                $this->contao4Version = \Jean85\PrettyVersions::getVersion('contao/contao')->getShortVersion();
-            }
-
-            $bundles = System::getContainer()->getParameter('kernel.bundles');
-            $this->hasNewsCategories = in_array(CodefogNewsCategoriesBundle::class, $bundles);
-        }
+        $bundles = System::getContainer()->getParameter('kernel.bundles');
+        $this->hasNewsCategories = \in_array(CodefogNewsCategoriesBundle::class, $bundles);
     }
 
     /**
@@ -75,10 +58,6 @@ class NewsSorting
     public function getSortingOptions(DataContainer $dc)
     {
         if ($dc->activeRecord && 'newsmenu' === $dc->activeRecord->type) {
-            if ($this->contao4Version === null || \Composer\Semver\Semver::satisfies($this->contao4Version, '<4.5')) {
-                return ['ascending', 'descending'];    
-            }
-
             return ['order_date_asc', 'order_date_desc'];
         }
 
@@ -164,11 +143,6 @@ class NewsSorting
             return false;
         }
 
-        // not Contao 4: always use hook
-        if (null === $this->contao4Version) {
-            return true;
-        }
-
         // don't use hook when news_categories filtering is enabled
         if ($this->hasNewsCategories) {
             if ($module->news_filterCategoriesCumulative || $module->news_filterCategories || $module->news_relatedCategories) {
@@ -182,33 +156,7 @@ class NewsSorting
             }
         }
 
-        // use the hook, if the new 'featured_first' option is used in Contao <4.8
-        if (Semver::satisfies($this->contao4Version, '<4.8') && 'featured_first' === $module->news_featured) {
-            return true;
-        }
-
-        // only use hook in Contao >=4.5, if the core options are not used
-        if (Semver::satisfies($this->contao4Version, '>=4.5') && \in_array($module->news_order, self::$coreSortOptions45)) {
-            return false;
-        }
-
-        // otherwise use the hook
-        return true;
-    }
-
-    /**
-     * Helper function to get the current Contao version.
-     */
-    public static function getContaoVersion(): string
-    {
-        if (class_exists(ContaoCoreBundle::class)) {
-            try {
-                return PrettyVersions::getVersion('contao/core-bundle')->getShortVersion();
-            } catch (\OutOfBoundsException $e) {
-                return PrettyVersions::getVersion('contao/contao')->getShortVersion();
-            }           
-        } else {
-            return VERSION.'.'.BUILD;
-        }
+        // only use hook , if the module options are used
+        return \in_array($module->news_order, self::$moduleSortOptions);
     }
 }

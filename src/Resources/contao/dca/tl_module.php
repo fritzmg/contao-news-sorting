@@ -1,8 +1,6 @@
 <?php
 
-use Composer\Semver\Semver;
 use Contao\CoreBundle\ContaoCoreBundle;
-use Contao\CoreBundle\DataContainer\PaletteManipulator;
 use Contao\NewsBundle\ContaoNewsBundle;
 
 /**
@@ -28,22 +26,7 @@ if (class_exists(ContaoCoreBundle::class) && !class_exists(ContaoNewsBundle::cla
 /**
  * Extend tl_module palettes
  */
-$contaoVersion = NewsSorting::getContaoVersion();
-
-if (class_exists(ContaoCoreBundle::class)) {
-    if (Semver::satisfies($contaoVersion, '<4.5')) {
-    	PaletteManipulator::create()
-    		->addField('news_order', 'config_legend', PaletteManipulator::POSITION_APPEND)
-			->applyToPalette('newslist', 'tl_module')
-		;
-	}
-} else {
-	$GLOBALS['TL_DCA']['tl_module']['palettes']['newslist'] = str_replace(',news_featured', ',news_featured,news_order', $GLOBALS['TL_DCA']['tl_module']['palettes']['newslist']);
-}
-
-if (Semver::satisfies($contaoVersion, '<4.8')) {
-	$GLOBALS['TL_DCA']['tl_module']['fields']['news_featured']['options'][] = 'featured_first';
-}
+$GLOBALS['TL_DCA']['tl_module']['palettes']['newslist'] = str_replace(',news_featured', ',news_featured,news_order', $GLOBALS['TL_DCA']['tl_module']['palettes']['newslist']);
 
 
 /**
