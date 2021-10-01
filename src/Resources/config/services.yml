@@ -1,4 +1,14 @@
 services:
+  NewsSortingBundle\EventListener\ModuleDataContainerListener: ~
+
+  NewsSortingBundle\EventListener\NewsDataContainerListener:
+    arguments:
+      - '@session'
+
+  NewsSortingBundle\EventListener\NewsCategoriesNewsSortingListener:
+    arguments:
+      - '@?codefog_news_categories.news_criteria_builder'
+
   NewsSortingBundle\EventListener\NewsSortingListener:
     arguments:
       - '%kernel.bundles%'

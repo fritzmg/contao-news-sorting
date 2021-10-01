@@ -19,3 +19,5 @@ $GLOBALS['TL_LANG']['tl_module']['order_headline_desc']    = 'Titel (absteigend)
 $GLOBALS['TL_LANG']['tl_module']['order_random']           = 'Zufällig';
 $GLOBALS['TL_LANG']['tl_module']['order_random_date_desc'] = 'Zufällig (Datum absteigend)';
 $GLOBALS['TL_LANG']['tl_module']['order_featured_desc']    = 'Hervorgehoben (Datum absteigend)';
+$GLOBALS['TL_LANG']['tl_module']['order_custom_date_asc']  = 'Manuelle Sortierung, Datum aufsteigend';
+$GLOBALS['TL_LANG']['tl_module']['order_custom_date_desc'] = 'Manuelle Sortierung, Datum absteigend';
