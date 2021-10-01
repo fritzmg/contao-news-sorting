@@ -1,7 +1,6 @@
 <?php
 
-use Contao\CoreBundle\ContaoCoreBundle;
-use Contao\NewsBundle\ContaoNewsBundle;
+declare(strict_types=1);
 
 /**
  * Contao Open Source CMS
@@ -13,21 +12,6 @@ use Contao\NewsBundle\ContaoNewsBundle;
  * @license   LGPL-3.0-or-later
  * @copyright Fritz Michael Gschwantner 2019
  */
-
-
-/**
- * Check for news bundle
- */
-if (class_exists(ContaoCoreBundle::class) && !class_exists(ContaoNewsBundle::class)) {
-	return;
-}
-
-
-/**
- * Extend tl_module palettes
- */
-$GLOBALS['TL_DCA']['tl_module']['palettes']['newslist'] = str_replace(',news_featured', ',news_featured,news_order', $GLOBALS['TL_DCA']['tl_module']['palettes']['newslist']);
-
 
 /**
  * Add options_callback to news_order field
