@@ -9,9 +9,7 @@ services:
     arguments:
       - '@?codefog_news_categories.news_criteria_builder'
 
-  NewsSortingBundle\EventListener\NewsSortingListener:
-    arguments:
-      - '%kernel.bundles%'
+  NewsSortingBundle\EventListener\NewsSortingListener: ~
 
   NewsSortingBundle\Migration\NewsSortingMigration:
     arguments:

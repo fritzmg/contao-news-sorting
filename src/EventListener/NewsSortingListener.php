@@ -12,7 +12,6 @@ declare(strict_types=1);
 
 namespace NewsSortingBundle\EventListener;
 
-use Codefog\NewsCategoriesBundle\CodefogNewsCategoriesBundle;
 use Contao\CoreBundle\ServiceAnnotation\Hook;
 use Contao\Model\Collection;
 use Contao\Module;
@@ -20,21 +19,6 @@ use Contao\NewsModel;
 
 class NewsSortingListener extends AbstractNewsListFetchItemsListener
 {
-    /**
-     * Whether the news_categories bundle is available.
-     *
-     * @var bool
-     */
-    protected $hasNewsCategories = false;
-
-    /**
-     * Constructor.
-     */
-    public function __construct(array $bundles)
-    {
-        $this->hasNewsCategories = \in_array(CodefogNewsCategoriesBundle::class, $bundles, true);
-    }
-
     /**
      * newsListFetchItems hook.
      *
