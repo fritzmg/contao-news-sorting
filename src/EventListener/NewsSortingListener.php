@@ -1,6 +1,19 @@
 <?php
 
+declare(strict_types=1);
+
+/*
+ * This file is part of the NewsSorting Bundle.
+ *
+ * (c) inspiredminds
+ *
+ * @license LGPL-3.0-or-later
+ */
+
+namespace NewsSortingBundle\EventListener;
+
 use Codefog\NewsCategoriesBundle\CodefogNewsCategoriesBundle;
+use Contao\CoreBundle\ServiceAnnotation\Hook;
 use Contao\DataContainer;
 use Contao\Model\Collection;
 use Contao\Module;
@@ -18,8 +31,10 @@ use Contao\System;
  * @copyright Fritz Michael Gschwantner 2017
  */
 
-
-class NewsSorting
+/**
+ * @Hook("newsListFetchItems")
+ */
+class NewsSortingListener
 {
     /**
      * News list sort options of the contao/news-bundle (>=4.5)
@@ -75,7 +90,7 @@ class NewsSorting
      *
      * @return Model\Collection|NewsModel|null|boolean
      */
-    public function newsListFetchItems($newsArchives, $featured, $limit, $offset, Module $module)
+    public function __invoke($newsArchives, $featured, $limit, $offset, Module $module)
     {
         if (!$this->useHook($module)) {
             return false;

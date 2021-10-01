@@ -42,8 +42,7 @@
     "autoload": {
         "psr-4": {
             "NewsSortingBundle\\": "src/"
-        },
-        "classmap": ["src/Resources/contao/classes/NewsSorting.php"]
+        }
     },
     "extra":{
         "contao-manager-plugin": "NewsSortingBundle\\ContaoManager\\Plugin"

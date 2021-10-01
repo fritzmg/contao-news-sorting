@@ -1,0 +1,4 @@
+services:
+  NewsSortingBunlde\EventListener\NewsSortingListener:
+    arguments:
+      - '%kernel.bundles%'
