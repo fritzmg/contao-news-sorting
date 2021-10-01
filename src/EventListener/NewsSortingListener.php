@@ -13,6 +13,7 @@ declare(strict_types=1);
 namespace NewsSortingBundle\EventListener;
 
 use Codefog\NewsCategoriesBundle\CodefogNewsCategoriesBundle;
+use Contao\CoreBundle\ServiceAnnotation\Callback;
 use Contao\CoreBundle\ServiceAnnotation\Hook;
 use Contao\DataContainer;
 use Contao\Model\Collection;
@@ -31,9 +32,6 @@ use Contao\System;
  * @copyright Fritz Michael Gschwantner 2017
  */
 
-/**
- * @Hook("newsListFetchItems")
- */
 class NewsSortingListener
 {
     /**
@@ -69,6 +67,8 @@ class NewsSortingListener
      * @param DataContainer $dc
      *
      * @return array
+     *
+     * @Callback(table="tl_module", target="fields.news_order.options")
      */
     public function getSortingOptions(DataContainer $dc)
     {
@@ -89,8 +89,10 @@ class NewsSortingListener
      * @param \ModuleNewsList $module
      *
      * @return Model\Collection|NewsModel|null|boolean
+     *
+     * @Hook("newsListFetchItems")
      */
-    public function __invoke($newsArchives, $featured, $limit, $offset, Module $module)
+    public function onNewsListFetchItems($newsArchives, $featured, $limit, $offset, Module $module)
     {
         if (!$this->useHook($module)) {
             return false;
