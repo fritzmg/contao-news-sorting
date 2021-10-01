@@ -19,7 +19,6 @@ use Contao\DataContainer;
 use Contao\Model\Collection;
 use Contao\Module;
 use Contao\StringUtil;
-use Contao\System;
 
 /**
  * Contao Open Source CMS
@@ -35,10 +34,10 @@ use Contao\System;
 class NewsSortingListener
 {
     /**
-     * News list sort options of the contao/news-bundle (>=4.5)
+     * News list sort options of the contao/news-bundle
      * @var array
      */
-    protected static $coreSortOptions45 = ['order_date_desc', 'order_date_asc', 'order_headline_asc', 'order_headline_desc', 'order_random'];
+    protected static $coreSortOptions = ['order_date_desc', 'order_date_asc', 'order_headline_asc', 'order_headline_desc', 'order_random'];
 
     /**
      * News list sort features not in the core
@@ -55,9 +54,8 @@ class NewsSortingListener
     /**
      * Constructor
      */
-    public function __construct()
+    public function __construct(array $bundles)
     {
-        $bundles = System::getContainer()->getParameter('kernel.bundles');
         $this->hasNewsCategories = \in_array(CodefogNewsCategoriesBundle::class, $bundles);
     }
 
@@ -70,13 +68,13 @@ class NewsSortingListener
      *
      * @Callback(table="tl_module", target="fields.news_order.options")
      */
-    public function getSortingOptions(DataContainer $dc)
+    public function getSortingOptions(DataContainer $dc): array
     {
         if ($dc->activeRecord && 'newsmenu' === $dc->activeRecord->type) {
             return ['order_date_asc', 'order_date_desc'];
         }
 
-        return array_unique(array_merge(self::$coreSortOptions45, self::$moduleSortOptions));
+        return array_unique(array_merge(self::$coreSortOptions, self::$moduleSortOptions));
     }
 
     /**
