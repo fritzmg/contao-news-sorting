@@ -10,14 +10,14 @@ declare(strict_types=1);
  * @license LGPL-3.0-or-later
  */
 
-namespace NewsSortingBundle\ContaoManager;
+namespace InspiredMinds\NewsSortingBundle\ContaoManager;
 
 use Contao\CoreBundle\ContaoCoreBundle;
 use Contao\ManagerPlugin\Bundle\BundlePluginInterface;
 use Contao\ManagerPlugin\Bundle\Config\BundleConfig;
 use Contao\ManagerPlugin\Bundle\Parser\ParserInterface;
 use Contao\NewsBundle\ContaoNewsBundle;
-use NewsSortingBundle\NewsSortingBundle;
+use InspiredMinds\NewsSortingBundle\NewsSortingBundle;
 
 /**
  * Plugin for the Contao Manager.

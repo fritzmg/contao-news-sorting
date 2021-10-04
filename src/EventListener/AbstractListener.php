@@ -10,7 +10,7 @@ declare(strict_types=1);
  * @license LGPL-3.0-or-later
  */
 
-namespace NewsSortingBundle\EventListener;
+namespace InspiredMinds\NewsSortingBundle\EventListener;
 
 abstract class AbstractListener
 {
