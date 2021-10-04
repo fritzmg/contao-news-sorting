@@ -7,7 +7,7 @@ services:
 
   InspiredMinds\NewsSortingBundle\EventListener\NewsCategoriesNewsSortingListener:
     arguments:
-      - '@?codefog_news_categories.news_criteria_builder'
+      - '@codefog_news_categories.news_criteria_builder'
 
   InspiredMinds\NewsSortingBundle\EventListener\NewsSortingListener: ~
 

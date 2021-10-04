@@ -12,6 +12,7 @@ declare(strict_types=1);
 
 namespace InspiredMinds\NewsSortingBundle\ContaoManager;
 
+use Codefog\NewsCategoriesBundle\CodefogNewsCategoriesBundle;
 use Contao\CoreBundle\ContaoCoreBundle;
 use Contao\ManagerPlugin\Bundle\BundlePluginInterface;
 use Contao\ManagerPlugin\Bundle\Config\BundleConfig;
@@ -31,7 +32,7 @@ class Plugin implements BundlePluginInterface
     {
         return [
             BundleConfig::create(NewsSortingBundle::class)
-                ->setLoadAfter([ContaoCoreBundle::class, ContaoNewsBundle::class])
+                ->setLoadAfter([ContaoCoreBundle::class, ContaoNewsBundle::class, CodefogNewsCategoriesBundle::class])
                 ->setReplace(['news_sorting']),
         ];
     }

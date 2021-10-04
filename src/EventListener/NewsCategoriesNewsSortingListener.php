@@ -23,14 +23,14 @@ use Contao\ModuleNewsList;
 final class NewsCategoriesNewsSortingListener extends AbstractNewsListFetchItemsListener
 {
     /**
-     * @var NewsCriteriaBuilder|null
+     * @var NewsCriteriaBuilder
      */
     private $searchBuilder;
 
     /**
      * InsertTagsListener constructor.
      */
-    public function __construct(?NewsCriteriaBuilder $searchBuilder)
+    public function __construct(NewsCriteriaBuilder $searchBuilder)
     {
         $this->searchBuilder = $searchBuilder;
     }
@@ -48,10 +48,6 @@ final class NewsCategoriesNewsSortingListener extends AbstractNewsListFetchItems
      */
     public function onNewsListFetchItems(array $archives, $featured, $limit, $offset, ModuleNewsList $module)
     {
-        if (null === $this->searchBuilder) {
-            return null;
-        }
-
         if (null === ($criteria = $this->getCriteria($archives, $featured, $module))) {
             return null;
         }
