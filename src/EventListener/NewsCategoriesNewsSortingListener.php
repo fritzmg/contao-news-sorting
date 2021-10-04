@@ -62,11 +62,13 @@ final class NewsCategoriesNewsSortingListener extends AbstractNewsListFetchItems
         $options = $criteria->getOptions();
         $options['order'] = $this->getOrder($module);
 
-        return $criteria->getNewsModelAdapter()->findBy(
+        $collection = $criteria->getNewsModelAdapter()->findBy(
             $criteria->getColumns(),
             $criteria->getValues(),
             $options
         );
+
+        return $this->applyOrderRandomDateDesc($collection, $module);
     }
 
     /**

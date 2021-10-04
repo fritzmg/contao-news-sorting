@@ -28,7 +28,7 @@ class NewsSortingListener extends AbstractNewsListFetchItemsListener
      * @param int             $offset
      * @param \ModuleNewsList $module
      *
-     * @return Model\Collection|NewsModel|bool|null
+     * @return Collection|NewsModel|bool|null
      *
      * @Hook("newsListFetchItems")
      */
@@ -39,19 +39,22 @@ class NewsSortingListener extends AbstractNewsListFetchItemsListener
         }
 
         $order = $this->getOrder($module);
-
         $collection = \NewsModel::findPublishedByPids($newsArchives, $featured, $limit, $offset, ['order' => $order]);
 
-        if (null !== $collection && 'order_random_date_desc' === $module->news_sorting) {
-            $models = $collection->getModels();
+        return $this->applyOrderRandomDateDesc($collection, $module);
+    }
 
-            usort($models, function ($a, $b) {
-                return $b->date - $a->date;
-            });
-
-            $collection = new Collection($models, 'tl_news');
+    /**
+     * Checks whether the hook should be used.
+     */
+    private function useHook(Module $module): bool
+    {
+        // don't use hook for default sorting
+        if ((!$module->news_order || 'order_date_desc' === $module->news_order) && 'featured_first' !== $module->news_featured) {
+            return false;
         }
 
-        return $collection;
+        // only use hook , if the module options are used
+        return \in_array($module->news_order, self::$moduleSortOptions, true);
     }
 }

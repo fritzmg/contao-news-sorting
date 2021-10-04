@@ -12,25 +12,12 @@ declare(strict_types=1);
 
 namespace InspiredMinds\NewsSortingBundle\EventListener;
 
+use Contao\Model\Collection;
 use Contao\Module;
 use Contao\NewsModel;
 
 abstract class AbstractNewsListFetchItemsListener extends AbstractListener
 {
-    /**
-     * Checks whether the hook should be used.
-     */
-    protected function useHook(Module $module): bool
-    {
-        // don't use hook for default sorting
-        if ((!$module->news_order || 'order_date_desc' === $module->news_order) && 'featured_first' !== $module->news_featured) {
-            return false;
-        }
-
-        // only use hook , if the module options are used
-        return \in_array($module->news_order, self::$moduleSortOptions, true);
-    }
-
     protected function getOrder(Module $module): string
     {
         // Determine sorting
@@ -72,5 +59,20 @@ abstract class AbstractNewsListFetchItemsListener extends AbstractListener
         }
 
         return $order;
+    }
+
+    protected function applyOrderRandomDateDesc(?Collection $collection, Module $module): ?Collection
+    {
+        if (null === $collection || 'order_random_date_desc' !== $module->news_sorting) {
+            return $collection;
+        }
+
+        $models = $collection->getModels();
+
+        usort($models, function ($a, $b) {
+            return $b->date - $a->date;
+        });
+
+        return new Collection($models, 'tl_news');
     }
 }
