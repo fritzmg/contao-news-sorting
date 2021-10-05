@@ -22,7 +22,7 @@ use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
 /**
  * This is the Bundle extension.
  */
-class NewsSortingExtension extends Extension
+class ContaoNewsSortingExtension extends Extension
 {
     /**
      * Loads a specific configuration.
