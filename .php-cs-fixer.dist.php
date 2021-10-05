@@ -1,7 +1,7 @@
 <?php
 
 $header = <<<EOF
-This file is part of the NewsSorting Bundle.
+This file is part of ContaoNewsSorting.
 
 (c) inspiredminds
 

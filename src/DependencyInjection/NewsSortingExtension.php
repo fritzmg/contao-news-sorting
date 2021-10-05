@@ -3,17 +3,17 @@
 declare(strict_types=1);
 
 /*
- * This file is part of the NewsSorting Bundle.
+ * This file is part of ContaoNewsSorting.
  *
  * (c) inspiredminds
  *
  * @license LGPL-3.0-or-later
  */
 
-namespace InspiredMinds\NewsSortingBundle\DependencyInjection;
+namespace InspiredMinds\ContaoNewsSorting\DependencyInjection;
 
-use InspiredMinds\NewsSortingBundle\EventListener\NewsCategoriesNewsSortingListener;
-use InspiredMinds\NewsSortingBundle\EventListener\NewsSortingListener;
+use InspiredMinds\ContaoNewsSorting\EventListener\NewsCategoriesNewsSortingListener;
+use InspiredMinds\ContaoNewsSorting\EventListener\NewsSortingListener;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Extension\Extension;

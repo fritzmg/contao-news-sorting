@@ -3,14 +3,14 @@
 declare(strict_types=1);
 
 /*
- * This file is part of the NewsSorting Bundle.
+ * This file is part of ContaoNewsSorting.
  *
  * (c) inspiredminds
  *
  * @license LGPL-3.0-or-later
  */
 
-namespace InspiredMinds\NewsSortingBundle\EventListener;
+namespace InspiredMinds\ContaoNewsSorting\EventListener;
 
 use Codefog\NewsCategoriesBundle\Criteria\NewsCriteria;
 use Codefog\NewsCategoriesBundle\Criteria\NewsCriteriaBuilder;

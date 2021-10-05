@@ -3,17 +3,17 @@
 declare(strict_types=1);
 
 /*
- * This file is part of the NewsSorting Bundle.
+ * This file is part of ContaoNewsSorting.
  *
  * (c) inspiredminds
  *
  * @license LGPL-3.0-or-later
  */
 
-namespace InspiredMinds\NewsSortingBundle;
+namespace InspiredMinds\ContaoNewsSorting;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
-class NewsSortingBundle extends Bundle
+class ContaoNewsSortingBundle extends Bundle
 {
 }

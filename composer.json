@@ -44,10 +44,10 @@
     },
     "autoload": {
         "psr-4": {
-            "InspiredMinds\\NewsSortingBundle\\": "src/"
+            "InspiredMinds\\ContaoNewsSorting\\": "src/"
         }
     },
     "extra":{
-        "contao-manager-plugin": "InspiredMinds\\NewsSortingBundle\\ContaoManager\\Plugin"
+        "contao-manager-plugin": "InspiredMinds\\ContaoNewsSorting\\ContaoManager\\Plugin"
     }
 }

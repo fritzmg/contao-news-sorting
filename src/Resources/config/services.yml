@@ -1,17 +1,17 @@
 services:
-  InspiredMinds\NewsSortingBundle\EventListener\ModuleDataContainerListener: ~
+  InspiredMinds\ContaoNewsSorting\EventListener\ModuleDataContainerListener: ~
 
-  InspiredMinds\NewsSortingBundle\EventListener\NewsDataContainerListener:
+  InspiredMinds\ContaoNewsSorting\EventListener\NewsDataContainerListener:
     arguments:
       - '@session'
 
-  InspiredMinds\NewsSortingBundle\EventListener\NewsCategoriesNewsSortingListener:
+  InspiredMinds\ContaoNewsSorting\EventListener\NewsCategoriesNewsSortingListener:
     arguments:
       - '@codefog_news_categories.news_criteria_builder'
 
-  InspiredMinds\NewsSortingBundle\EventListener\NewsSortingListener: ~
+  InspiredMinds\ContaoNewsSorting\EventListener\NewsSortingListener: ~
 
-  InspiredMinds\NewsSortingBundle\Migration\NewsSortingMigration:
+  InspiredMinds\ContaoNewsSorting\Migration\NewsSortingMigration:
     arguments:
       - '@database_connection'
     tags:
