@@ -1,0 +1,18 @@
+services:
+  InspiredMinds\ContaoNewsSorting\EventListener\ModuleDataContainerListener: ~
+
+  InspiredMinds\ContaoNewsSorting\EventListener\NewsDataContainerListener:
+    arguments:
+      - '@session'
+
+  InspiredMinds\ContaoNewsSorting\EventListener\NewsCategoriesNewsSortingListener:
+    arguments:
+      - '@codefog_news_categories.news_criteria_builder'
+
+  InspiredMinds\ContaoNewsSorting\EventListener\NewsSortingListener: ~
+
+  InspiredMinds\ContaoNewsSorting\Migration\NewsSortingMigration:
+    arguments:
+      - '@database_connection'
+    tags:
+      - { name: 'contao.migration' }
