@@ -15,5 +15,9 @@ The following settings are available:
 * Random
 * Random (Date descending)
 * Featured
+* Custom (Date ascending)
+* Custom (Date descending)
 
 Some of these settings are already available in some Contao 4 versions. The extension is fully compatible with that and only uses the hook when necessary.
+
+When using the _Custom_ sort setting you can switch the sorting in the back end to _Sorting value_ and then sort the news articles via drag & drop in the back end.
