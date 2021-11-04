@@ -48,6 +48,10 @@ final class NewsCategoriesNewsSortingListener extends AbstractNewsListFetchItems
      */
     public function onNewsListFetchItems(array $archives, $featured, $limit, $offset, ModuleNewsList $module)
     {
+        if (!$this->useHook($module)) {
+            return false;
+        }
+
         if (null === ($criteria = $this->getCriteria($archives, $featured, $module))) {
             return null;
         }

@@ -43,18 +43,4 @@ class NewsSortingListener extends AbstractNewsListFetchItemsListener
 
         return $this->applyOrderRandomDateDesc($collection, $module);
     }
-
-    /**
-     * Checks whether the hook should be used.
-     */
-    private function useHook(Module $module): bool
-    {
-        // don't use hook for default sorting
-        if ((!$module->news_order || 'order_date_desc' === $module->news_order) && 'featured_first' !== $module->news_featured) {
-            return false;
-        }
-
-        // only use hook , if the module options are used
-        return \in_array($module->news_order, self::$moduleSortOptions, true);
-    }
 }
