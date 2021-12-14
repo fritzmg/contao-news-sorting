@@ -20,4 +20,4 @@ The following settings are available:
 
 Some of these settings are already available in some Contao 4 versions. The extension is fully compatible with that and only uses the hook when necessary.
 
-When using the _Custom_ sort setting you can switch the sorting in the back end to _Sorting value_ and then sort the news articles via drag & drop in the back end.
+When using the _Custom_ sort setting you can switch the sorting in the back end to _Sorting value_ (do not forget to apply) and then sort the news articles via drag & drop in the back end.
