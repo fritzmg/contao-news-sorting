@@ -12,8 +12,6 @@ declare(strict_types=1);
 
 namespace InspiredMinds\ContaoNewsSorting\DependencyInjection;
 
-use InspiredMinds\ContaoNewsSorting\EventListener\NewsCategoriesNewsSortingListener;
-use InspiredMinds\ContaoNewsSorting\EventListener\NewsSortingListener;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Extension\Extension;
@@ -31,13 +29,7 @@ class ContaoNewsSortingExtension extends Extension
      */
     public function load(array $configs, ContainerBuilder $container): void
     {
-        $loader = new YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
-        $loader->load('services.yml');
-
-        if (isset($container->getParameter('kernel.bundles')['CodefogNewsCategoriesBundle'])) {
-            $container->removeDefinition(NewsSortingListener::class);
-        } else {
-            $container->removeDefinition(NewsCategoriesNewsSortingListener::class);
-        }
+        $loader = new YamlFileLoader($container, new FileLocator(__DIR__.'/../../config'));
+        $loader->load('services.yaml');
     }
 }

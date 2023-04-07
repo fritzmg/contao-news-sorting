@@ -77,7 +77,7 @@ class NewsFilterEventListener extends AbstractListener
 
         $models = $collection->getModels();
 
-        usort($models, fn($a, $b) => $b->date - $a->date);
+        usort($models, fn ($a, $b) => $b->date - $a->date);
 
         return new Collection($models, 'tl_news');
     }
