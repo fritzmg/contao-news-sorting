@@ -8,3 +8,4 @@ services:
 
     InspiredMinds\ContaoNewsSorting\EventListener\NewsFilterEventListener:
         arguments: ['@contao_news_filter_event.news_list_hook_listener']
+        tags: [{name: 'kernel.event_listener', event: InspiredMinds\ContaoNewsFilterEvent\Event\NewsFilterEvent, method: onNewsFilterEvent }]

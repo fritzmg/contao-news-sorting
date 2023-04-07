@@ -38,15 +38,15 @@ class NewsFilterEventListener extends AbstractListener
 
         switch ($module->news_order) {
             case 'order_random_date_desc':
-                $event->addOption('order', 'RAND()');
+                $event->addOption('order', 'RAND()', true);
                 break;
 
             case 'order_custom_date_asc':
-                $event->addOption('order', 'tl_news.sorting, tl_news.date ASC');
+                $event->addOption('order', 'tl_news.sorting, tl_news.date ASC', true);
                 break;
 
             case 'order_custom_date_desc':
-                $event->addOption('order', 'tl_news.sorting, tl_news.date DESC');
+                $event->addOption('order', 'tl_news.sorting, tl_news.date DESC', true);
                 break;
         }
     }
