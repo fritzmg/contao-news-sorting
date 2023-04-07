@@ -18,8 +18,7 @@ use Doctrine\DBAL\Connection;
 
 class NewsSortingMigration extends AbstractMigration
 {
-    /** @var Connection */
-    private $connection;
+    private Connection $connection;
 
     public function __construct(Connection $connection)
     {
@@ -44,6 +43,6 @@ class NewsSortingMigration extends AbstractMigration
         $this->connection->executeStatement('UPDATE tl_module SET news_order = REPLACE(news_sorting, \'sort_\', \'order_\') WHERE type = \'newslist\'');
         $this->connection->executeStatement('ALTER TABLE tl_module DROP COLUMN news_sorting');
 
-        return $this->createResult();
+        return $this->createResult(true);
     }
 }

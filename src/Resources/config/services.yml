@@ -1,18 +1,10 @@
 services:
-  InspiredMinds\ContaoNewsSorting\EventListener\ModuleDataContainerListener: ~
+    _defaults:
+        autoconfigure: true
+        autowire: true
 
-  InspiredMinds\ContaoNewsSorting\EventListener\NewsDataContainerListener:
-    arguments:
-      - '@session'
+    InspiredMinds\ContaoNewsSorting\:
+        resource: ../src
 
-  InspiredMinds\ContaoNewsSorting\EventListener\NewsCategoriesNewsSortingListener:
-    arguments:
-      - '@codefog_news_categories.news_criteria_builder'
-
-  InspiredMinds\ContaoNewsSorting\EventListener\NewsSortingListener: ~
-
-  InspiredMinds\ContaoNewsSorting\Migration\NewsSortingMigration:
-    arguments:
-      - '@database_connection'
-    tags:
-      - { name: 'contao.migration' }
+    InspiredMinds\ContaoNewsSorting\EventListener\NewsFilterEventListener:
+        arguments: ['@contao_news_filter_event.news_list_hook_listener']

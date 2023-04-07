@@ -16,10 +16,8 @@ abstract class AbstractListener
 {
     /**
      * News list sort features not in the core.
-     *
-     * @var array
      */
-    protected static $moduleSortOptions = [
+    protected static array $moduleSortOptions = [
         'order_random_date_desc',
         'order_custom_date_asc',
         'order_custom_date_desc',

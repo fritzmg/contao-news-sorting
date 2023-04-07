@@ -13,22 +13,24 @@ declare(strict_types=1);
 namespace InspiredMinds\ContaoNewsSorting\EventListener;
 
 use Contao\CoreBundle\ServiceAnnotation\Callback;
-use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use Symfony\Component\HttpFoundation\RequestStack;
 
+/**
+ * @Callback(table="tl_news", target="config.onload")
+ */
 class NewsDataContainerListener
 {
-    /** @var SessionInterface */
-    private $session;
+    private RequestStack $requestStack;
 
-    public function __construct(SessionInterface $session)
+    public function __construct(RequestStack $requestStack)
     {
-        $this->session = $session;
+        $this->requestStack = $requestStack;
     }
 
-    /** @Callback(table="tl_news", target="config.onload") */
-    public function onLoad(): void
+    public function __invoke(): void
     {
-        $sorting = $this->session->getBag('contao_backend')->get('sorting')['tl_news'] ?? null;
+        $session = $this->requestStack->getCurrentRequest()->getSession();
+        $sorting = $session->getBag('contao_backend')->get('sorting')['tl_news'] ?? null;
 
         // Only set sorting as the first field if custom sorting is chosen.
         if ('sorting' === $sorting) {
