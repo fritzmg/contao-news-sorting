@@ -33,7 +33,7 @@
         "symfony/dependency-injection": " ^4.4 || ^5.1 || ^6.0",
         "symfony/config": "^4.4 || ^5.1 || ^6.0",
         "symfony/http-kernel": "^4.4 || ^5.1 || ^6.0",
-		"inspiredminds/contao-news-filter-event": "^1.1"
+        "inspiredminds/contao-news-filter-event": "^1.1"
     },
     "require-dev": {
         "contao/manager-plugin": "^2.11",
