@@ -5,7 +5,7 @@ declare(strict_types=1);
 /*
  * This file is part of ContaoNewsSorting.
  *
- * (c) inspiredminds
+ * (c) INSPIRED MINDS
  *
  * @license LGPL-3.0-or-later
  */
@@ -14,23 +14,23 @@ namespace InspiredMinds\ContaoNewsSorting\EventListener;
 
 use Contao\CoreBundle\ServiceAnnotation\Callback;
 use Symfony\Component\HttpFoundation\RequestStack;
+use Symfony\Component\HttpFoundation\Session\Attribute\AttributeBagInterface;
 
 /**
  * @Callback(table="tl_news", target="config.onload")
  */
 class NewsDataContainerListener
 {
-    private RequestStack $requestStack;
-
-    public function __construct(RequestStack $requestStack)
+    public function __construct(private readonly RequestStack $requestStack)
     {
-        $this->requestStack = $requestStack;
     }
 
     public function __invoke(): void
     {
         $session = $this->requestStack->getCurrentRequest()->getSession();
-        $sorting = $session->getBag('contao_backend')->get('sorting')['tl_news'] ?? null;
+        $sessionBag = $session->getBag('contao_backend');
+        \assert($sessionBag instanceof AttributeBagInterface);
+        $sorting = $sessionBag->get('sorting')['tl_news'] ?? null;
 
         // Only set sorting as the first field if custom sorting is chosen.
         if ('sorting' === $sorting) {

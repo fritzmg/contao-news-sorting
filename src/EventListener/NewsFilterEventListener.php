@@ -21,11 +21,8 @@ use InspiredMinds\ContaoNewsFilterEvent\EventListener\NewsListHookListener;
 
 class NewsFilterEventListener extends AbstractListener
 {
-    private NewsListHookListener $newsFilterEventHookListener;
-
-    public function __construct(NewsListHookListener $newsFilterEventHookListener)
+    public function __construct(private readonly NewsListHookListener $newsFilterEventHookListener)
     {
-        $this->newsFilterEventHookListener = $newsFilterEventHookListener;
     }
 
     public function onNewsFilterEvent(NewsFilterEvent $event): void
@@ -58,7 +55,7 @@ class NewsFilterEventListener extends AbstractListener
      *
      * @Hook("newsListFetchItems", priority=1500)
      */
-    public function onNewsListFetchItems(array $archives, ?bool $featured, int $limit, int $offset, Module $module)
+    public function onNewsListFetchItems(array $archives, bool|null $featured, int $limit, int $offset, Module $module)
     {
         $result = $this->newsFilterEventHookListener->onNewsListFetchItems($archives, $featured, $limit, $offset, $module);
 
@@ -77,7 +74,7 @@ class NewsFilterEventListener extends AbstractListener
 
         $models = $collection->getModels();
 
-        usort($models, fn ($a, $b) => $b->date - $a->date);
+        usort($models, static fn ($a, $b) => $b->date - $a->date);
 
         return new Collection($models, 'tl_news');
     }

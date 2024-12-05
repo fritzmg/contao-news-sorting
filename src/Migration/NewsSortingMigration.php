@@ -5,7 +5,7 @@ declare(strict_types=1);
 /*
  * This file is part of ContaoNewsSorting.
  *
- * (c) inspiredminds
+ * (c) INSPIRED MINDS
  *
  * @license LGPL-3.0-or-later
  */
@@ -18,16 +18,13 @@ use Doctrine\DBAL\Connection;
 
 class NewsSortingMigration extends AbstractMigration
 {
-    private Connection $connection;
-
-    public function __construct(Connection $connection)
+    public function __construct(private readonly Connection $connection)
     {
-        $this->connection = $connection;
     }
 
     public function shouldRun(): bool
     {
-        $schemaManager = $this->connection->getSchemaManager();
+        $schemaManager = $this->connection->createSchemaManager();
 
         if (!$schemaManager->tablesExist(['tl_news'])) {
             return false;
@@ -40,7 +37,7 @@ class NewsSortingMigration extends AbstractMigration
 
     public function run(): MigrationResult
     {
-        $this->connection->executeStatement('UPDATE tl_module SET news_order = REPLACE(news_sorting, \'sort_\', \'order_\') WHERE type = \'newslist\'');
+        $this->connection->executeStatement("UPDATE tl_module SET news_order = REPLACE(news_sorting, 'sort_', 'order_') WHERE type = 'newslist'");
         $this->connection->executeStatement('ALTER TABLE tl_module DROP COLUMN news_sorting');
 
         return $this->createResult(true);

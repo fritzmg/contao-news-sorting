@@ -5,6 +5,7 @@ services:
 
     InspiredMinds\ContaoNewsSorting\:
         resource: ../src
+        exclude: ../src/{ContaoManager,DependencyInjection,ContaoNewsSortingBundle.php}
 
     InspiredMinds\ContaoNewsSorting\EventListener\NewsFilterEventListener:
         arguments: ['@contao_news_filter_event.news_list_hook_listener']
