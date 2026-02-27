@@ -38,7 +38,7 @@ class ModuleNewsOrderOptionsListener extends AbstractListener
                 return $defaultOptions;
             }
 
-            return array_merge($defaultOptions, self::$moduleSortOptions);
+            return [...$defaultOptions, ...self::$moduleSortOptions];
         };
     }
 }

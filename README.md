@@ -6,6 +6,8 @@ Contao News Sorting
 
 This Contao extension adds additional sort settings for the news list:
 
+* Subheadline ascending
+* Subheadline descending
 * Random (Date descending)
 * Custom (Date ascending)
 * Custom (Date descending)

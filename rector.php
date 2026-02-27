@@ -2,18 +2,22 @@
 
 declare(strict_types=1);
 
+/*
+ * This file is part of ContaoNewsSorting.
+ *
+ * (c) INSPIRED MINDS
+ *
+ * @license LGPL-3.0-or-later
+ */
+
 use Contao\Rector\Set\SetList;
 use Rector\Config\RectorConfig;
-use Rector\Php81\Rector\Array_\FirstClassCallableRector;
 
 return RectorConfig::configure()
     ->withSets([SetList::CONTAO])
     ->withPaths([
         __DIR__.'/contao',
         __DIR__.'/src',
-    ])
-    ->withSkip([
-        FirstClassCallableRector::class,
     ])
     ->withParallel()
     ->withCache(sys_get_temp_dir().'/rector_cache')
