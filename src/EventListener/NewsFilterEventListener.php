@@ -28,11 +28,11 @@ class NewsFilterEventListener extends AbstractListener
 
         switch ($module->news_order) {
             case 'subheadline_asc':
-                $event->addOption('order', 'tl_news.subheadline ASC', true);
+                $event->addOption('order', 'tl_news.subheadline ASC, tl_news.headline ASC, tl_news.date ASC', true);
                 break;
 
             case 'subheadline_desc':
-                $event->addOption('order', 'tl_news.subheadline DESC', true);
+                $event->addOption('order', 'tl_news.subheadline DESC, tl_news.headline DESC, tl_news.date DESC', true);
                 break;
 
             case 'order_random_date_desc':
